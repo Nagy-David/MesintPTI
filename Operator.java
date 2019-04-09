@@ -54,5 +54,8 @@ public class Operator {
 		return new StringBuffer().append(i).append(" -> ").append(j).toString();
 	}
 	
+        public int getKoltseg(){
+            return 1;
+        }
 	
 }
