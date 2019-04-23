@@ -69,7 +69,7 @@ public class Optimalis {
             if(nyiltak.isEmpty()){
                 return null;
             }            
-            //kiválaszt: a legkisebb heurisztikájú csúcsot választja ki.
+            //kiválaszt: a legkisebb útköltségű csúcsot választja ki.
             
             Node aktualis = nyiltak.stream().
                             min( (a,b)->a.koltseg-b.koltseg  ).get();
@@ -100,7 +100,7 @@ public class Optimalis {
                     Node ny = voltMar(nyiltak,aktualis);
                     
                     if(ny==null && voltMar(zartak,aktualis)==null){
-                        nyiltak.add(new Node(uj,aktualis,o)); //ha még nem volt ilyen állapotú csúcs akkor nyiltként hozzáfűzöm                      
+                        nyiltak.add(new Node(uj,aktualis,o)); //ha még nem volt ilyen állapotú csúcs akkor nyíltként hozzáfűzöm                      
                     }
                     else if(ny!=null){
                         int uj_koltseg = aktualis.koltseg+o.getKoltseg();

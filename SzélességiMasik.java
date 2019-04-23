@@ -65,7 +65,7 @@ public class SzélességiMasik {
             if(nyiltak.isEmpty()){
                 return null;
             }            
-            //kiválaszt
+            //kiválaszt (sor)
             Node aktualis = nyiltak.remove(0);
             
             //célteszt
@@ -79,7 +79,7 @@ public class SzélességiMasik {
                     State uj = o.apply(aktualis.state);
                     
                     if(voltMar(nyiltak,aktualis)==null && voltMar(zartak,aktualis)==null){
-                        nyiltak.add(new Node(uj,aktualis,o)); //ha még nem volt ilyen állapotú csúcs akkor nyiltként hozzáfűzöm                      
+                        nyiltak.add(new Node(uj,aktualis,o)); //ha még nem volt ilyen állapotú csúcs akkor nyíltként hozzáfűzöm                      
                     }
                     
                 }

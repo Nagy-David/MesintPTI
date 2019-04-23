@@ -108,7 +108,7 @@ public class BestFirst {
                     State uj = o.apply(aktualis.state);
                     
                     if(voltMar(nyiltak,aktualis)==null && voltMar(zartak,aktualis)==null){
-                        nyiltak.add(new Node(uj,aktualis,o)); //ha még nem volt ilyen állapotú csúcs akkor nyiltként hozzáfűzöm                      
+                        nyiltak.add(new Node(uj,aktualis,o)); //ha még nem volt ilyen állapotú csúcs akkor nyíltként hozzáfűzöm                      
                     }
                     
                 }

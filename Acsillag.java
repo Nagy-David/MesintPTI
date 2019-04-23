@@ -103,7 +103,7 @@ public class Acsillag {
                     Node z = voltMar(zartak, aktualis);
 
                     if (ny == null && z == null) {
-                        nyiltak.add(new Node(uj, aktualis, o)); //ha még nem volt ilyen állapotú csúcs akkor nyiltként hozzáfűzöm                      
+                        nyiltak.add(new Node(uj, aktualis, o)); //ha még nem volt ilyen állapotú csúcs akkor nyíltként hozzáfűzöm                      
                     } else {
                         int uj_koltseg = aktualis.koltseg + o.getKoltseg();
 
