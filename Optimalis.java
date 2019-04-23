@@ -26,9 +26,7 @@ public class Optimalis {
             this.state = state;
             this.parent = parent;
             this.creator = creator;
-            this.koltseg = parent==null?0:parent.koltseg+creator.getKoltseg();
-
-//az adott csúcs heurisztikáját adja meg.
+            this.koltseg = parent==null?0:parent.koltseg+creator.getKoltseg(); //költség
         }
     }
     
@@ -72,12 +70,11 @@ public class Optimalis {
                 return null;
             }            
             //kiválaszt: a legkisebb heurisztikájú csúcsot választja ki.
-            /*
+            
             Node aktualis = nyiltak.stream().
-                            min( Comparator.comparing(Node::getHeurisztika)).
-                            ;
-            */
-            Node aktualis = nyiltak.get(0);
+                            min( (a,b)->a.koltseg-b.koltseg  ).get();
+            
+            /*Node aktualis = nyiltak.get(0);
             int index = 0;
             for (int i = 1; i < nyiltak.size(); i++) {
                 if(nyiltak.get(i).koltseg < aktualis.koltseg){
@@ -85,7 +82,8 @@ public class Optimalis {
                     index = i;
                 }                  
             }
-            nyiltak.remove(index);
+            nyiltak.remove(index);*/
+            nyiltak.remove(aktualis);
             
             
             System.out.println(aktualis.state);               

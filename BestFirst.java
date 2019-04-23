@@ -77,11 +77,14 @@ public class BestFirst {
                 return null;
             }            
             //kiválaszt: a legkisebb heurisztikájú csúcsot választja ki.
-            /*
+            
+            //Node aktualis = nyiltak.stream().
+            //                min( Comparator.comparing(Node::getHeurisztika)).get();
+            
             Node aktualis = nyiltak.stream().
-                            min( Comparator.comparing(Node::getHeurisztika)).
-                            ;
-            */
+                            min( (a,b)-> (int)(a.heurisztika-b.heurisztika)   ).get();
+            
+            /*
             Node aktualis = nyiltak.get(0);
             int index = 0;
             for (int i = 1; i < nyiltak.size(); i++) {
@@ -90,8 +93,8 @@ public class BestFirst {
                     index = i;
                 }                  
             }
-            nyiltak.remove(index);
-            
+            nyiltak.remove(index);*/
+            nyiltak.remove(aktualis);
             
             System.out.println(aktualis.state);               
             //célteszt
