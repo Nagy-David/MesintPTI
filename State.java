@@ -1,4 +1,4 @@
-package korso;
+package mestint;
 
 import java.util.Arrays;
 
@@ -65,5 +65,9 @@ public class State {
                         .append(a[3]).append(')').toString();
 	}
 
+        
+        public double heurisztika(){
+            return 1;
+        }
 	
 }

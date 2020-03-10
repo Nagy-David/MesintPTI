@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package korso;
+package mestint;
 
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -97,13 +97,14 @@ public class Acsillag {
             //kiterjeszt
             for (Operator o : Operator.OPERATORS) {
                 if (o.isApplicable(aktualis.state)) {
-                    State uj = o.apply(aktualis.state);
-
-                    Node ny = voltMar(nyiltak, aktualis);
-                    Node z = voltMar(zartak, aktualis);
+                    //létrehozom az új csomópontot a megfelelő adatokkal
+                    Node uj =new Node(o.apply(aktualis.state),aktualis,o);   
+                    //megvizsgáljuk, hogy tároltuk-e már ezt a csomópontot valahol
+                    Node ny = voltMar(nyiltak, uj);
+                    Node z = voltMar(zartak, uj);
 
                     if (ny == null && z == null) {
-                        nyiltak.add(new Node(uj, aktualis, o)); //ha még nem volt ilyen állapotú csúcs akkor nyíltként hozzáfűzöm                      
+                        nyiltak.add(uj); //ha még nem volt ilyen állapotú csúcs akkor nyíltként hozzáfűzöm                      
                     } else {
                         int uj_koltseg = aktualis.koltseg + o.getKoltseg();
 

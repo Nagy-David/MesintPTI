@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package korso;
+package mestint;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,9 +16,10 @@ public class SzélességiMasik {
 
     static class Node {
 
-        State state;
-        Node parent;
-        Operator creator;
+        State state; //adott állapot
+        Node parent; //szülő
+        Operator creator; //a creator az az operátor melyet a parent csomópont state állapotára 
+                          //alkalmaztunk és ezáltal a state állapot jött létre.
 
         public Node(State state, Node parent, Operator creator) {
             this.state = state;
@@ -51,43 +52,36 @@ public class SzélességiMasik {
     }
     
     
-    public static List<Operator> keres(){
-        
+    public static List<Operator> keres(){     
         //két listát hozunk létre: nyíltak és zártak
         List<Node> nyiltak = new LinkedList<>();
-        List<Node> zartak = new LinkedList<>();
-        
-        nyiltak.add( new Node(State.start(), null, null)  ); //kezdőadatbázis. Nyíltként fűzöm fel a startcsúcsot.
-        
-        while(true){
-            
+        List<Node> zartak = new LinkedList<>(); 
+        nyiltak.add( new Node(State.start(), null, null)  ); //kezdőadatbázis. 
+        //Nyíltként fűzöm fel a startcsúcsot.      
+        while(true){         
             //van nyílt?
             if(nyiltak.isEmpty()){
                 return null;
             }            
             //kiválaszt (sor)
-            Node aktualis = nyiltak.remove(0);
-            
+            Node aktualis = nyiltak.remove(0);            
             //célteszt
             if(aktualis.state.isGoal()){
                 return megoldas(aktualis);
-            }
-            
+            }        
             //kiterjeszt
             for (Operator o: Operator.OPERATORS) {
                 if(o.isApplicable(aktualis.state)){
-                    State uj = o.apply(aktualis.state);
-                    
-                    if(voltMar(nyiltak,aktualis)==null && voltMar(zartak,aktualis)==null){
-                        nyiltak.add(new Node(uj,aktualis,o)); //ha még nem volt ilyen állapotú csúcs akkor nyíltként hozzáfűzöm                      
-                    }
-                    
+                    //létrehozom az új csomópontot a megfelelő adatokkal
+                    Node uj =new Node(o.apply(aktualis.state),aktualis,o);   
+                    //megvizsgáljuk, hogy tároltuk-e már ezt a csomópontot valahol
+                    if(voltMar(nyiltak,uj)==null && voltMar(zartak,uj)==null){
+                        nyiltak.add(uj); //ha még nem volt ilyen állapotú csúcs akkor nyíltként hozzáfűzöm                      
+                    }           
                 }
             }
-            zartak.add(aktualis); //hozzáteszem a kiterjesztett csúcsot a zárt csúcsokhoz
-            
-        }
-        
+            zartak.add(aktualis); //hozzáteszem a kiterjesztett csúcsot a zárt csúcsokhoz       
+        }       
     }
     
     public static void main(String[] args) {

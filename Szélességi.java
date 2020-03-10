@@ -1,9 +1,7 @@
-package korso;
+package mestint;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.plaf.SliderUI;
 
 public class Szélességi {
 

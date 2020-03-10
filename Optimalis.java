@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package korso;
+package mestint;
 
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -95,12 +95,12 @@ public class Optimalis {
             //kiterjeszt
             for (Operator o: Operator.OPERATORS) {
                 if(o.isApplicable(aktualis.state)){
-                    State uj = o.apply(aktualis.state);
+                    //létrehozom az új csomópontot a megfelelő adatokkal
+                    Node uj =new Node(o.apply(aktualis.state),aktualis,o);   
+                    Node ny = voltMar(nyiltak,uj);
                     
-                    Node ny = voltMar(nyiltak,aktualis);
-                    
-                    if(ny==null && voltMar(zartak,aktualis)==null){
-                        nyiltak.add(new Node(uj,aktualis,o)); //ha még nem volt ilyen állapotú csúcs akkor nyíltként hozzáfűzöm                      
+                    if(ny==null && voltMar(zartak,uj)==null){
+                        nyiltak.add(uj); //ha még nem volt ilyen állapotú csúcs akkor nyíltként hozzáfűzöm                      
                     }
                     else if(ny!=null){
                         int uj_koltseg = aktualis.koltseg+o.getKoltseg();
